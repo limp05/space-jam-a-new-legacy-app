@@ -53,7 +53,7 @@ function processPlayers(allPlayerStats) {
 
 // Function to add the players to the bench to start the game
 function displayPlayerBench() {
-    // Get the bench div in which the players will be shown.
+ // Get the bench div in which the players will be shown.
     var bench = document.getElementById('playersOnBench');
 
     // For each player, create a button 
