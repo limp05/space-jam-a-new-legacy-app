@@ -12,12 +12,12 @@
 
   <body>
     <main>
-      <h1><img style="vertical-align:middle" src="images/SpaceJamANewLegacyLogo.png"><br>Water Break App</h1>
+      <h1><img style="vertical-align:middle" src="images/SpaceJamANewLegacyLogo.png"><br>APP pra pausa para água</h1>
     </main>
 
     <div id="gameSetup" class="gameSetup">
       <div id="uploadStats" class="topColumn">
-        <p class="topTitle">Upload your game_stats.csv file here</p>
+        <p class="topTitle">Carregue seu arquivo game_stats.csv aqui</p>
         <input type="file" id="playerData">
         <script type="text/javascript"> 
           document.getElementById('playerData') 
@@ -37,28 +37,28 @@
 
       <div id="gameButton" class="topColumn">
         <p class="topTitle"></p>
-        <button type="button" id="start" class="start" onclick="startNextQuarter()">Start the Game!</button>
+        <button type="button" id="start" class="start" onclick="startNextQuarter()">Comece o jogo!</button>
       </div>
       
       <div id="avePER" class="topColumn">
-        <p class="topTitle">Average PER:</p>
+        <p class="topTitle">Média de PER:</p>
         <p class="topTitle" id="averagePER"></p>
       </div>
     </div>
 
     <div id="gamePlay" class="gamePlay">
       <div id="bench" class="column">
-        <div class="timer">Water Break</div>
+        <div class="timer">Pausa para água</div>
         <div id="playersOnBench"></div>
-        <p class="title">BENCH</p>
+        <p class="title">Banco</p>
       </div>
 
       <div id="court" class="column">
-        <div id="timer" class="timer">TIME: 00:00</div>
+        <div id="timer" class="timer">Tempo: 00:00</div>
         <p id="quarter" class="subtitle"></p>
         <div id="playersOnCourt"></div>
         <p class="subtitle" id="currentPER"></p>
-        <p class="title">COURT</p>
+        <p class="title">Em quadra</p>
       </div>
       
       <div id="stats" class="column">
