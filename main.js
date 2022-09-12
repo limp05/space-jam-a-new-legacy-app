@@ -1,154 +1,153 @@
-// A map of playerName to an array of playerPER values
+// Um mapa de playerName para um array de valores playerPER
 var playerMap = new Map();
 
-// Variables to keep track of constants 
+// Variáveis para manter o controle de constantes
 const maxPlayersOnCourt = 5;
 const numQuarters = 4;
 
-// Variables to track state throughout the game
+// Variáveis para rastrear o estado ao longo do jogo
 var currentQuarter = 0;
 var playersOnCourt = 0;
 var quarterInPlay = false;
 
-// Variables to track the PER throughout the game
+// Variáveis para rastrear o PER ao longo do jogo
 var quarterPER = 0;
 var quarterAvePER = 0;
 var totalAvePER = 0;
 
-// Function to read in all of the player stats
+// Função para ler todas as estatísticas do jogador
 function processPlayers(allPlayerStats) {
-    // Split the data by newline into an array.
+// Divida os dados por nova linha em um array.
     var allPlayerStatLines = allPlayerStats.split(/\r\n|\n/);
 
-    // remove the header line (first line)
+    // remove a linha de cabeçalho (primeira linha)
     allPlayerStatLines.shift();
 
-    // Loop through the 15 players and create a map entry of player name to player PER
+    // Percorre os 15 jogadores e cria uma entrada no mapa do nome do jogador para o jogador PER
     for (var statLine of allPlayerStatLines) {
-        // Get all individual stat values
+        // Obtém todos os valores de estatísticas individuais
         var stats = statLine.split(',');
 
-        // If it's just an empty line, skip it
-        if (!stats || stats.length <= 1) continue; // empty line
+        // Se for apenas uma linha vazia, pule-a
+        if (!stats || stats.length <= 1) continue; // linha vazia
 
-        // The second column has the player name
+        // A segunda coluna tem o nome do jogador
         var playerName = stats[1];
 
-        // check if player exists in map
+        // verifica se o jogador existe no mapa
         if (!playerMap.has(playerName)) {
-            // First time we see the player; Add them in!
+            // Primeira vez que vemos o jogador; Adicione-os!
             playerMap.set(playerName, []);
         }
 
-        // Get per value for player
+        // Obtém por valor para o jogador
         var per = parseFloat(stats[9]);
 
-        // Add per value to player's array (the next quarter)
+        // Adiciona por valor ao array do jogador (no próximo quarto)
         playerMap.get(playerName).push(per);
     }
 
-    // Add the players to the bench.
+    // Adiciona os jogadores ao banco.
     displayPlayerBench();
 }
 
-// Function to add the players to the bench to start the game
+// Função para adicionar os jogadores ao banco para iniciar o jogo
 function displayPlayerBench() {
- // Get the bench div in which the players will be shown.
+// Obtém a div do banco em que os jogadores serão mostrados.
     var bench = document.getElementById('playersOnBench');
 
-    // For each player, create a button 
+    // Para cada jogador, cria um botão
     for (let playerName of playerMap.keys()) {
-        // Create a button for each player
+        // Cria um botão para cada jogador
         var newPlayer = document.createElement('button');
 
-        // Set the ID to the name of the player so we can get it later
+        // Defina o ID para o nome do jogador para que possamos obtê-lo mais tarde
         newPlayer.id = playerName;
 
-        // Identify the style class, which will set the color scheme
+        // Identifica a classe de estilo, que definirá o esquema de cores
         newPlayer.className = 'playerButton';
 
-        // When the button is clicked, call the movePlayer function
+        // Quando o botão é clicado, chama a função movePlayer
         newPlayer.onclick = movePlayer;
 
-        // Add the players image to the button
+        // Adiciona a imagem dos jogadores ao botão
         var playerImage = document.createElement('img');
 
-        // Set the source (or location) of the image
+        // Define a fonte (ou local) da imagem
         playerImage.src = 'images/'+playerName+'.png';
 
-        // Add the image to the button
+        // Adiciona a imagem ao botão
         newPlayer.appendChild(playerImage);
 
-        // Add the button to the bench
+        // Adiciona o botão ao banco
         bench.appendChild(newPlayer);
     }
 
-    // Display cards for all players
+    // Exibe cartas para todos os jogadores
     displayPlayerCards();
 }
 
-// This function is called at the beginning of the game play to initialize
-// PER for each player, and at each quarter to do two things: 
-// 1. Ensure the players currently on the court have the correct PER represented
-// 2. Update the stats for each player for the current quarter
+// Esta função é chamada no início do jogo para inicializar
+// PER para cada jogador, e em cada quarto para fazer duas coisas:
+// 1. Garantir que os jogadores atualmente na quadra tenham o PER correto representado
+// 2. Atualize as estatísticas de cada jogador para o quarto atual
 function displayPlayerCards() {
-    // Get the div in which the stats will be shown.
+    // Esta função é chamada no início do jogo para inicializar
     var playerCardDisplay = document.getElementById('playerCards');
 
-    // For each player, create a player stat card to show the PER for that player for a 
-    // specific quarter.
+    // Para cada jogador, crie um cartão de estatísticas de jogador para mostrar o PER desse jogador por um
+     // quarto específico.
     for (let [playerName, playerStats] of playerMap.entries()) {
-        // Create an overall div that will contain the player stat information.
-        var playerCard = document.createElement('div');
+// Cria uma div geral que conterá as informações das estatísticas do jogador.        var playerCard = document.createElement('div');
 
-        // Set an ID for the card so we can get it later
+        // Defina um ID para o cartão para que possamos obtê-lo mais tarde
         playerCard.id = playerName + '_card';
 
-        // Set the style class name
+        // Define o nome da classe de estilo
         playerCard.className = 'playerCard';
 
-        // Add the player image to the div.
+        // Adiciona a imagem do player ao div.
         var playerImage = document.createElement('img');
 
-        // Set the style for the image
+        // Define o estilo da imagem
         playerImage.className = 'perCard';
 
-        // Load the image
+        // Carregue a imagem
         playerImage.src = 'images/'+playerName+'.png';
 
-        // Add the image to the card
+        // Adiciona a imagem ao cartão
         playerCard.appendChild(playerImage);
 
-        // Add the player's PER to the div.
+        // Adiciona o PER do jogador à div.
         var newPlayerPER = document.createElement('p');
 
-        // Set the style for the number
+        // Define o estilo do número
         newPlayerPER.className = 'perCard';
 
-        // Set the text for the PER
+        // Define o texto para o PER
         newPlayerPER.innerText = 'PER: ' + playerStats[currentQuarter].toPrecision(4);
 
-        // Add the PER
+        // ADD o PER
         playerCard.appendChild(newPlayerPER);
 
-        // Add the player stat card to the game.
+        // Adiciona o cartão de estatísticas do jogador ao jogo.
         playerCardDisplay.appendChild(playerCard);
     }
 }
 
-// This function is called each time a player button is clicked. A player
-// button being clicked indicates the players is either moving to the court
-// or to the bench for a water break
+// Esta função é chamada cada vez que um botão de jogador é clicado. Um jogador
+// botão sendo clicado indica que os jogadores estão se movendo para a quadra
+// ou para o banco para uma pausa para a água
 function movePlayer() {
-    // Do not let the coach change players during a quarter
+    // Não deixe o treinador trocar de jogador durante um quarto
     if(quarterInPlay) {
         return;
     }
 
-    // Get the div in which this button currently is (either bench or court).
+    // Obtém a div em que este botão está atualmente (seja bancada ou quadra).
     var parentDiv = this.parentElement;
 
-    // Check whether the player is currently on the bench.
+    // Verifica se o jogador está atualmente no banco.
     if(parentDiv.id == 'playersOnBench') {
 
         // If there are already five players on the court, don't let the player
