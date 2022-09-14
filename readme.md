@@ -1,7 +1,7 @@
 # Tune Squad Coaches App Template
 
-This repo is a template for the Tune Squad Coaches App, which is part of the second module in the 
-[Use basketball stats to optimize game play with Visual Studio Code, inspired by SPACE JAM: A NEW LEGACY](https://aka.ms/ExploreSportsWithCode/) Microsoft Learn learning path, inspired by the new film *Space Jam: A New Legacy*. Check out the learning path to learn more!
+Este repositório é um template para o App Tune Squad Coaches, que faz parte do segundo módulo do
+[Use basketball stats to optimize game play with Visual Studio Code, inspired by SPACE JAM: A NEW LEGACY](https://aka.ms/ExploreSportsWithCode/) Microsoft Learn learning path, inspirado no novo filme *Space Jam: A New Legacy*.
 
 Copyright (c) Microsoft Corporation.
 
